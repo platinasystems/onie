@@ -1,0 +1,17 @@
+Source: onie
+Section: net
+Priority: optional
+Maintainer: Kevin Paul Herbert <kph@platinasystems.com>
+Build-Depends: debhelper (>=10), dkms
+Standards-Version: 3.9.8
+Homepage: https://platinasystems.com
+Vcs-Browser: https://github.com/platinasystems/onie
+Vcs-Git: https://github.com/platinasystems/onie.git
+
+Package: onie
+Architecture: any
+Depends: ${misc:Depends}, libelf-dev, build-essential
+Description: Platina Systems onie driver
+ Parser for onie-format EEPROMs.
+
+
