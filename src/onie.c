@@ -291,9 +291,10 @@ static ssize_t onie_cell_validate(struct onie_priv *priv)
 	priv->cell = nvmem_cell_get(&priv->pd->dev, "onie-data");
 	if (IS_ERR(priv->cell)) {
 		err = PTR_ERR(priv->cell);
-		if (err == -EPROBE_DEFER)
+		if (err == -EPROBE_DEFER || err == -ENOENT) {
 			priv->cell = NULL;
-		else
+			err = -EPROBE_DEFER;
+		} else
 			onie_pr_err("nvmem_cell_get(%s): %d", name, err);
 		return onie_cache_unlock(priv, err);
 	} else if (!priv->cell) {
@@ -486,6 +487,7 @@ static int onie_set_tlv(struct onie_priv *priv,
 static int onie_probe(struct platform_device *pd)
 {
 	struct onie_priv *priv;
+	int err;
 
 	priv = devm_kzalloc(&pd->dev, sizeof(*priv), GFP_KERNEL);
 	if (!priv)
@@ -494,7 +496,10 @@ static int onie_probe(struct platform_device *pd)
 	mutex_init(&priv->cache.mutex);
 	mutex_init(&priv->writeback.mutex);
 	platform_set_drvdata(pd, priv);
-	onie_cell_validate(priv);
+	err = onie_cell_validate(priv);
+	if (err < 0)
+		return err;
+
 	return devm_device_add_groups(&pd->dev, onie_attr_groups);
 }
 
