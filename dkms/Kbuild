@@ -1,0 +1,6 @@
+obj-m += onie.o
+
+-include $(src)/onie_version.mk
+ifneq ($(ONIE_VERSION),)
+ccflags-y += -DONIE_VERSION=\"$(ONIE_VERSION)\"
+endif

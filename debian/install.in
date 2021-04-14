@@ -1,0 +1,5 @@
+dkms/sysfs-driver-onie usr/share/doc/onie-dkms/
+dkms/Kbuild usr/src/onie-DEB_VERSION_UPSTREAM/
+dkms/Makefile usr/src/onie-DEB_VERSION_UPSTREAM/
+dkms/*.mk usr/src/onie-DEB_VERSION_UPSTREAM/
+dkms/*.c usr/src/onie-DEB_VERSION_UPSTREAM/

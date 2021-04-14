@@ -19,6 +19,16 @@
 #include <linux/etherdevice.h>
 #include <linux/glob.h>
 
+#if defined(KBUILD_MODNAME)
+# define ONIE_MOD_NAME KBUILD_MODNAME
+#else /* !KBUILD_MODNAME */
+# define ONIE_MOD_NAME "onie"
+#endif /* KBUILD_MODNAME */
+
+#if !defined(ONIE_VERSION)
+#define ONIE_VERSION "undefined"
+#endif
+
 #define onie_pr_debug(format, args...)					\
 do {									\
 	pr_debug("%s:" format "\n", __func__, ##args);			\
@@ -51,6 +61,7 @@ do {									\
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Platina Systems");
 MODULE_DESCRIPTION("a platform driver for ONIE format NVMEM");
+MODULE_VERSION(ONIE_VERSION);
 
 static const struct of_device_id onie_of_match[] = {
 	{ .compatible = "linux,onie", },
@@ -58,7 +69,7 @@ static const struct of_device_id onie_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, onie_of_match);
 
-static const char onie_driver_name[] = "nvmem_onie";
+static const char onie_driver_name[] = ONIE_MOD_NAME;
 static int onie_probe(struct platform_device *);
 static int onie_remove(struct platform_device *);
 
