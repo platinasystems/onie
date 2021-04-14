@@ -16,18 +16,13 @@ endif
 # subject, verb, object(s)
 svo = $(if $(Q),$(info $1 $3))$(Q)$2 $3
 
-define debuild
-$(call svo, DEBUILD, debuild -uc -us --lintian-opts --profile debian)
-endef
-
-define mk-dkms
-$(call svo, DKMS, $(MAKE) -C dkms, $@)
-endef
-
 default:
 
-bindeb-pkg: ; $(debuild)
+bindeb-pkg:
+	$(call svo, DEBUILD,\
+		debuild -uc -us -ui -b --lintian-opts --profile debian)
 
-modules modules_install clean: ; $(mk-dkms)
+modules modules_install clean:
+	$(call svo, DKMS, $(MAKE) -C dkms, $@)
 
 .PHONY: default bindeb-pkg clean modules modules_install
