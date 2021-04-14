@@ -1,3 +1,10 @@
+onie (0.0.2) stretch; urgency=medium
+
+  * rename deb onie-dkms
+  * add README
+
+ -- Tom Grennan <tgrennan@platinasystems.com>  Wed, 14 Apr 2021 12:38:51 -0700
+
 onie (0.0.1) stretch; urgency=medium
 
   Initial commit.
