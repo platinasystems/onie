@@ -11,6 +11,6 @@ Vcs-Git: https://github.com/platinasystems/onie.git
 
 Package: onie-dkms
 Architecture: all
-Depends: ${misc:Depends}, libelf-dev, build-essential
+Depends: ${misc:Depends}, dkms, libelf-dev, build-essential
 Description: Platina Systems onie driver
  Parser for onie-format EEPROMs.

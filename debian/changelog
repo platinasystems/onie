@@ -1,3 +1,13 @@
+onie (0.0.3) stretch; urgency=medium
+
+  [ Tom Grennan ]
+  * make bindeb-pkg binary only
+
+  [ Kevin Paul Herbert ]
+  * debian/control: Add a dependency on dkms
+
+ -- Kevin Paul Herbert <kph@platinasystems.com>  Wed, 21 Apr 2021 13:59:32 -0700
+
 onie (0.0.2) stretch; urgency=medium
 
   * rename deb onie-dkms
